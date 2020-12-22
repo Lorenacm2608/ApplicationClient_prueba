@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,13 +8,6 @@ package flyshoes.entitys;
 
 import java.io.Serializable;
 import java.util.Set;
-import javax.persistence.Entity;
-import static javax.persistence.FetchType.EAGER;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -24,29 +18,15 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author Fredy
  */
-@Entity
-@PrimaryKeyJoinColumn(referencedColumnName = "id_usuario")
-@Table(name = "administrador", schema = "flyshoesdb")
-@NamedQueries({
-    @NamedQuery(name = "listaProveedores",
-            query = "SELECT p FROM Proveedor p  ORDER BY p.empresa"
-    )
-    ,@NamedQuery(name = "listaVendedores",
-            query = "SELECT v FROM Vendedor v  ORDER BY v.login "
-    )
-    ,@NamedQuery(name = "administradorByLogin",
-            query = "SELECT a FROM Administrador a WHERE a.login=:login"
-    )})
-
 @XmlRootElement
 public class Administrador extends Usuario implements Serializable {
 
     private static final long serialVersionUID = 1L;
     //Lista de Proveedores gestionados
-    @OneToMany(mappedBy = "administrador", fetch = EAGER)
+    
     private Set<Proveedor> proveedores;
     
-    @OneToMany(mappedBy = "administrador", fetch = EAGER)
+    
     private Set<Vendedor> vendedores;
 
     /**

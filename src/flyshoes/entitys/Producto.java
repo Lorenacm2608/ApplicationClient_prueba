@@ -2,24 +2,6 @@ package flyshoes.entitys;
 
 import java.io.Serializable;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import static javax.persistence.FetchType.EAGER;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -31,17 +13,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * proveedor. Esta entidad tiene una identificador de producto, una descripción,
  * un precio y una imagen del producto.
  */
-@Entity
-@Table(name = "producto", schema = "flyshoesdb")
-@NamedQueries({
-    @NamedQuery(name = "findAllProductosAsc", query = "SELECT p FROM Producto p ORDER BY p.precio ASC")
-    ,
-    @NamedQuery(name = "findAllProductosDesc", query = "SELECT p FROM Producto p ORDER BY p.precio DESC")
-    ,
-    @NamedQuery(name = "findAllZapatillas", query = "SELECT p FROM Producto p WHERE p.tipo LIKE 'ZAPATILLAS'")
-    ,
-    @NamedQuery(name = "findAllRopa", query = "SELECT p FROM Producto p WHERE p.tipo LIKE 'ROPA'")
-})
+
 @XmlRootElement
 public class Producto implements Serializable {
 
@@ -49,52 +21,50 @@ public class Producto implements Serializable {
     /**
      * Identificador del producto
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   
     private Long id;
     /**
      * Descripcion del producto
      */
-    @NotNull
+    
     private String descripcion;
     /**
      * Precio del producto
      */
-    @NotNull
+   
     private Float precio;
     /**
      * Imagen del producto
      */
-    @Lob
+  
     private byte[] imagen;
 
-    @NotNull
+    
     private String talla;
 
-    @NotNull
-    @Enumerated(EnumType.STRING)
+    
     private TipoProducto tipo;
 
-    @NotNull
+   
     private Integer stock;
 
-    @NotNull
+   
     private String modelo;
 
     /**
      * Relación con la entidad Reserva
      */
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "producto")
+    
     private Set<Reserva> reservas;
     /**
      * Relación con la entidad Proveedor
      */
-    @ManyToOne
+    
     private Proveedor proveedor;
     /**
      * Relación con la entidad Vendedor
      */
-    @ManyToMany(mappedBy = "productos", cascade = CascadeType.ALL, fetch = EAGER)
+ 
     private Set<Vendedor> vendedores;
 
     /**

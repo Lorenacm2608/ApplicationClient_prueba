@@ -5,16 +5,15 @@
  */
 package flyshoes.factory;
 
-import flyshoes.restfuls.ReservaRESTClient;
-import flyshoes.manager.ReservaManager;
+import flyshoes.manager.ProveedorManager;
+import flyshoes.restfuls.ProveedorRESTClient;
 
 /**
  *
  * @author 2dam
  */
-public class ReservaFactory {
-    public ReservaManager getReservaRESTClient (){
-        return new ReservaRESTClient();
+public class ProveedorFactory {
+    public ProveedorManager getProveedorRESTClient (){
+        return new ProveedorRESTClient();
     }
-    
 }

@@ -7,19 +7,6 @@ package flyshoes.entitys;
 
 import java.io.Serializable;
 import java.util.Set;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import static javax.persistence.FetchType.EAGER;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -28,44 +15,37 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @author Fredy
  */
-@Entity
-@Table(name = "proveedor", schema = "flyshoesdb")
-@NamedQuery(name = "listaProductos",
-        query = "SELECT p FROM Producto p WHERE p.proveedor.idProveedor =:id ORDER BY p.modelo ")
-
 @XmlRootElement
 
 public class Proveedor implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+   
     //id del proveedor
     private Long idProveedor;
-    @NotNull
+  
     private String nombre;
     //tipo de proveedor 
-    @NotNull
-    @Enumerated(EnumType.STRING)
+   
     private TipoProducto tipo;
     //empresa a la que pertenece el proveedor
-    @NotNull
+   
     private String empresa;
     //correo del proveedor
-    @NotNull
+  
     private String email;
     //telefono del proveedor
-    @NotNull
+   
     private String telefono;
     //descripcion del proveedor
     private String descripcion;
 
     //administrador encargado del proveedor
-    @ManyToOne
+  
     private Administrador administrador;
     
     //lista de productos ofrecidos por el proveedor
-    @OneToMany(mappedBy = "proveedor", fetch = EAGER)
+   
     private Set<Producto> productos;
 
     /**

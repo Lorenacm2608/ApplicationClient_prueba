@@ -1,21 +1,22 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package flyshoes.cliente;
+package flyshoes.restfuls;
 
-import flyshoes.manager.ReservaManager;
+import flyshoes.manager.AdministradorManager;
 import javax.ws.rs.ClientErrorException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 
 /**
- * Jersey REST client generated for REST resource:ReservaFacadeREST
- * [reserva]<br>
+ * Jersey REST client generated for REST resource:AdministradorFacadeREST
+ * [administrador]<br>
  * USAGE:
  * <pre>
- *        ReservaRESTClient client = new ReservaRESTClient();
+ *        AdministradorRESTClient client = new AdministradorRESTClient();
  *        Object response = client.XXX(...);
  *        // do whatever with response
  *        client.close();
@@ -23,20 +24,20 @@ import javax.ws.rs.client.WebTarget;
  *
  * @author 2dam
  */
-public class ReservaRESTClient implements ReservaManager {
+public class AdministradorRESTClient implements  AdministradorManager{
 
     private WebTarget webTarget;
     private Client client;
-    private static final String BASE_URI = "http://localhost:8080/ApplicationServerFlyshoes/webresources";
+    private static final String BASE_URI = "http://localhost:8080/ApplicationServerFinal/webresources";
 
-    public ReservaRESTClient() {
+    public AdministradorRESTClient() {
         client = javax.ws.rs.client.ClientBuilder.newClient();
-        webTarget = client.target(BASE_URI).path("reserva");
+        webTarget = client.target(BASE_URI).path("administrador");
     }
 
-    public <T> T findReservasCanceladas(Class<T> responseType) throws ClientErrorException {
+    public <T> T getVendedores(Class<T> responseType) throws ClientErrorException {
         WebTarget resource = webTarget;
-        resource = resource.path("findReservasCanceladas");
+        resource = resource.path("vendedores");
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
 
@@ -44,9 +45,9 @@ public class ReservaRESTClient implements ReservaManager {
         webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_XML).put(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
 
-    public <T> T findReservasConfirmadas(Class<T> responseType) throws ClientErrorException {
+    public <T> T getProveedores(Class<T> responseType) throws ClientErrorException {
         WebTarget resource = webTarget;
-        resource = resource.path("findReservasConfirmadas");
+        resource = resource.path("proveedores");
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
 
@@ -56,14 +57,14 @@ public class ReservaRESTClient implements ReservaManager {
         return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
 
-    public void create(Object requestEntity) throws ClientErrorException {
-        webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_XML).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
+    public <T> T usuarioByLogin(Class<T> responseType, String login) throws ClientErrorException {
+        WebTarget resource = webTarget;
+        resource = resource.path(java.text.MessageFormat.format("administradorByLogin/{0}", new Object[]{login}));
+        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
     }
 
-    public <T> T findReservasRealizadas(Class<T> responseType) throws ClientErrorException {
-        WebTarget resource = webTarget;
-        resource = resource.path("findReservasRealizadas");
-        return resource.request(javax.ws.rs.core.MediaType.APPLICATION_XML).get(responseType);
+    public void create(Object requestEntity) throws ClientErrorException {
+        webTarget.request(javax.ws.rs.core.MediaType.APPLICATION_XML).post(javax.ws.rs.client.Entity.entity(requestEntity, javax.ws.rs.core.MediaType.APPLICATION_XML));
     }
 
     public void remove(String id) throws ClientErrorException {

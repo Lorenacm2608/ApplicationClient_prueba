@@ -7,28 +7,12 @@ package flyshoes.entitys;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author Moroni Entidad Usuario relacionado con gestiona Proveedor
  */
-@Entity
-@Inheritance(strategy = InheritanceType.JOINED)
-@Table(name = "usuario", schema = "flyshoesdb")
-@NamedQuery(name = "usuarioByLogin",
-        query = "SELECT u FROM Usuario u WHERE u.login =:login")
 @XmlRootElement
 public class Usuario implements Serializable {
 
@@ -37,44 +21,42 @@ public class Usuario implements Serializable {
     /*
     *Id del usuario
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_usuario;
 
     /*
     * Login del usuario
      */
-    @NotNull
+
     private String login;
 
     /*
     * Email del usuario
      */
-    @NotNull
+    
     private String email;
 
     /*
     * Nombre completo del usuario
      */
-    @NotNull
+    
     private String fullname;
 
     /*
     * Estado del usuario
      */
-    @Enumerated(EnumType.STRING)
+    
     private EstadoUsuario status;
 
     /*
     * Privilegio del usuario
      */
-    @Enumerated(EnumType.STRING)
+    
     private PrivilegioUsuario privilege;
 
     /*
     * Contraseña del usuario
      */
-    @NotNull
+    
     private String password;
 
     /*
@@ -87,9 +69,9 @@ public class Usuario implements Serializable {
      */
     private String lastPasswordChange;
 
-    @NotNull
+    
     private String direccion;
-    @NotNull
+    
     private Integer telefono;
 
     /**

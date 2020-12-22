@@ -2,15 +2,7 @@ package flyshoes.entitys;
 
 import java.io.Serializable;
 import java.util.Set;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import static javax.persistence.FetchType.EAGER;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -20,27 +12,7 @@ import javax.xml.bind.annotation.XmlTransient;
  *
  * @autorh Nadir
  */
-@Entity
-@PrimaryKeyJoinColumn(referencedColumnName = "id_usuario")
-@Table(name = "cliente", schema = "flyshoesdb")
-@NamedQueries({
-    @NamedQuery(name = "findReserva",
-            query = "SELECT r FROM Reserva r where r.cliente.id_usuario=:id")
-    ,
-    @NamedQuery(name = "clienteByLogin",
-            query = "SELECT c FROM Cliente c WHERE  c.login=:login")
-})
-/**
- * @NamedQueries({
- * @NamedQuery(name = "findAllProductosAsc", query = "SELECT p FROM Producto p
- * ORDER BY p.precio ASC") ,
- * @NamedQuery(name = "findAllProductosDesc", query = "SELECT p FROM Producto p
- * ORDER BY p.precio DESC") ,
- * @NamedQuery(name = "findAllZapatillas", query = "SELECT p FROM Producto p
- * WHERE p.tipo LIKE 'ZAPATILLAS'") ,
- * @NamedQuery(name = "findAllRopa", query = "SELECT p FROM Producto p WHERE
- * p.tipo LIKE 'ROPA'") })
- */
+
 @XmlRootElement
 public class Cliente extends Usuario implements Serializable {
 
@@ -48,13 +20,13 @@ public class Cliente extends Usuario implements Serializable {
     /*
     * Cliente se relación con reservas via OneToMany
      */
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, fetch = EAGER)
+  
     private Set<Reserva> reservas;
 
     /*
     * Cliente se relación con reservas via ManyToOne
      */
-    @ManyToOne
+ 
     private Vendedor vendedor;
 
     /**
